@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "My Svelte Extension",
+  "version": "1.0.0",
+  "description": "A Chrome extension built with Svelte 5",
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "My Extension"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["storage", "contextMenus", "activeTab", "scripting"],
+  "host_permissions": ["<all_urls>"],
+  "commands": {
+    "summary": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "Создать суммаризацию выделенного текста"
+    },
+    "open_popup": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+O",
+        "mac": "Command+Shift+O"
+      },
+      "description": "Открыть popup расширения"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}
