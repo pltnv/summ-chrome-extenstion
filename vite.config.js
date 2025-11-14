@@ -8,14 +8,25 @@ export default defineConfig({
     outDir: "dist",
     rollupOptions: {
       input: {
-        popup: resolve(__dirname, "index.html"),
-        background: resolve(__dirname, "src/background/background.js"),
-        content: resolve(__dirname, "src/content/content.js"),
+        index: resolve(__dirname, "index.html"),
+        sidepanel: resolve(__dirname, "sidepanel.html"),
+        background: resolve(__dirname, "src/background/background"),
+        content: resolve(__dirname, "src/content/content"),
       },
       output: {
-        entryFileNames: "[name].js",
+        entryFileNames: (chunkInfo) => {
+          const facadeModuleId = chunkInfo.facadeModuleId
+            ? chunkInfo.facadeModuleId.split("/").pop()
+            : chunkInfo.name;
+          return `${facadeModuleId?.replace(".html", "")}`;
+        },
       },
     },
     emptyOutDir: true,
+  },
+  resolve: {
+    alias: {
+      "@": resolve(__dirname, "src"),
+    },
   },
 });

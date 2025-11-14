@@ -1,16 +1,16 @@
 {
   "manifest_version": 3,
-  "name": "My Svelte Extension",
+  "name": "AI Text Assistant",
   "version": "1.0.0",
-  "description": "A Chrome extension built with Svelte 5",
-  "action": {
-    "default_popup": "index.html",
-    "default_title": "My Extension"
+  "description": "Chrome extension for AI-powered text analysis, explanation, and summarization",
+  "action": {},
+  "side_panel": {
+    "default_path": "sidepanel.html"
   },
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["storage", "contextMenus", "activeTab", "scripting"],
+  "permissions": ["storage", "contextMenus", "activeTab", "scripting", "sidePanel"],
   "host_permissions": ["<all_urls>"],
   "commands": {
     "summary": {
@@ -19,6 +19,13 @@
         "mac": "Command+Shift+S"
       },
       "description": "Создать суммаризацию выделенного текста"
+    },
+    "explain": {
+      "suggested_key": {
+        "default": "Alt+Shift+E",
+        "mac": "Alt+Shift+E"
+      },
+      "description": "Explain selected text"
     },
     "open_popup": {
       "suggested_key": {

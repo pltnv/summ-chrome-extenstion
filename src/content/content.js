@@ -2,13 +2,14 @@ let lastSelection = "";
 
 document.addEventListener("mouseup", () => {
   const text = window.getSelection().toString().trim();
+
   if (text) {
     lastSelection = text;
     console.log("[v0] Text selected:", text);
   }
 });
 
-// Также отслеживаем при изменении выделения
+
 document.addEventListener("selectionchange", () => {
   const text = window.getSelection().toString().trim();
   if (text) {
@@ -17,7 +18,7 @@ document.addEventListener("selectionchange", () => {
 });
 
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  if (msg.type === "GET_SELECTION") {
+  if (msg.type === "GET_SELECTION" || msg.action === "getSelection") {
     const currentSelection = getSelection().toString().trim();
 
     const textToSend = currentSelection || lastSelection;
